@@ -4,8 +4,18 @@ if [ -z "$CLUSTER_NODE_NETWORK_NAME" ]; then
     CLUSTER_NODE_NETWORK_NAME="`hostname`"
 fi
 
+# TODO docker-compose.yml could use the same -N suffix that kubernetes PetSet uses
+if [ -z "$NODE_NAME" ]; then
+    export NODE_NAME="`hostname`"
+fi
+
+if [ -z "$NODE_ID" ]; then
+    export NODE_ID="`echo $NODE_NAME | awk -F '-' '{print $NF}'`"
+fi
+
 echo "127.0.0.1 $CLUSTER_NODE_NETWORK_NAME" >> /etc/hosts
 # Need this loopback to speedup connections and also k8s doesn't have DNS loopback by service name on the same pod
+# TODO not needed with PetSet? Has entries like: 172.17.0.3	postgres-0.postgres.[namespace].svc.cluster.local	postgres-0
 
 echo "cluster=$CLUSTER_NAME
 node=$NODE_ID
