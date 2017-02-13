@@ -25,7 +25,7 @@ To start cluster run it as normal docker-compose application `docker-compose up`
 
 Please check comments for each ENV variable in [docker-compose](./docker-compose.yml) file to understand related parameter of cluster's node
 
-## Strat cluster in Kubernetes
+## Start cluster in Kubernetes
 
 To make it easier repository contains scripts for starting cluster using docker-machine and services' objects under `k8s` dir
 Requires software: `docker-machine` and `kubectl`
